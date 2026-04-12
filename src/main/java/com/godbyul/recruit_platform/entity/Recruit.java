@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -39,4 +40,16 @@ public class Recruit extends BaseEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(nullable = false, columnDefinition = "json")
     private String[] skill;
+
+    @Builder
+    private Recruit(Company company, String nationality, String region,
+                   String position, Integer reward, String content, String[] skill) {
+        this.company = company;
+        this.nationality = nationality;
+        this.region = region;
+        this.position = position;
+        this.reward = reward;
+        this.content = content;
+        this.skill = skill;
+    }
 }
