@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,4 +16,9 @@ public class Company extends BaseEntity {
 
     @Column(nullable = false)
     private String companyName;
+
+    @Builder
+    private Company(String companyName) {
+        this.companyName = companyName;
+    }
 }

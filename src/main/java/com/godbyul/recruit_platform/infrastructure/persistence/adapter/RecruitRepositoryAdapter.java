@@ -6,6 +6,7 @@ import com.godbyul.recruit_platform.entity.Company;
 import com.godbyul.recruit_platform.entity.Recruit;
 import com.godbyul.recruit_platform.infrastructure.persistence.jpa.CompanyJpaRepository;
 import com.godbyul.recruit_platform.infrastructure.persistence.jpa.RecruitJpaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,8 @@ public class RecruitRepositoryAdapter implements RecruitRepository {
 
     @Override
     public Recruit createRecruit(CreateRecruitCommand command) {
-        Company company = companyJpaRepository.getReferenceById(command.getCompanyId());
+        Company company = companyJpaRepository.findById(command.getCompanyId())
+                .orElseThrow(() -> new EntityNotFoundException("company not found"));
         return recruitJpaRepository.save(Recruit.builder()
                 .company(company)
                 .nationality(command.getNationality())
