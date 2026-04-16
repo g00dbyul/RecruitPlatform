@@ -32,6 +32,7 @@ public class Recruit extends BaseEntity {
     @Column(nullable = false)
     private String position;
 
+    @Column(nullable = false)
     private Integer reward;
 
     @Column(nullable = false, columnDefinition = "text")
